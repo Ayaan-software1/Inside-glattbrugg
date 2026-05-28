@@ -1,0 +1,478 @@
+
+<!-- Das hier ist HTML das ist wie das Skelet von unser project  -->
+
+
+<!-- Alle Elemente müssen hier geschriebn werden-->
+
+
+<!--(elemente sind Z. bsp Bilder, texte, listen)  -->
+
+
+
+
+<!-- Man braucht für jede webseite minimum html-->
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Inside Glattbrugg</title>
+<!-- paare sachen die von andere webseiten gebraucht werden sind von hier geruft  -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="icon" type="image/png" href="inside-glattbrugg-favicon.png">
+<!--paare sachen die von andere webseiten gebraucht werden sind von hier geruft                                                                 -->
+</head>
+<body>
+
+
+ <!--Das hier ist Top menu ganz Oben am website (horizontal)  -->
+<nav>
+  <a href="#" class="nav-logo">INSIDE<span>G</span></a>
+  <ul class="nav-links">
+    <li><a href="#spots">Spots</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#kultur">Kultur</a></li>
+    <li><a href="#natur">Natur</a></li>
+    <li><a href="#ai">KI-Guide</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+ <!-- Das ist das erste teil was man bei der webseite ansieht. -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <p class="hero-tag">Opfikon · Glattbrugg · Zürich</p>
+  <h1>INSIDE<br><em>Glattbrugg</em></h1>
+  <p class="hero-sub">Glattbrugg ist mehr als nur Fluglärm und Durchfahrt. Hier findest du echte Orte, lokale Geschichten und Spots, die viele übersehen.</p>
+  <div class="hero-scroll"><span></span> Scroll für mehr</div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">~22'000</div><div class="stat-label">Einwohner</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Stadtteile</div></div>
+    <div class="stat"><div class="stat-num">7km</div><div class="stat-label">bis Zürich HB</div></div>
+  </div>
+</header>
+
+<!-- SPOTS  -->
+ <!-- In den Spots sind die divs(gruppen von elements) eingenestet -->
+<section id="spots">
+
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Top Locations</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="spots-grid">
+
+
+    <!-- Glattpark/opfikerpark -->
+    <a href="https://www.google.com/search?q=opfikersee&sca_esv=eaf5d82a5c8d6869&sxsrf=ANbL-n72Z5vZ-GSDaVbaThKQy6Ab9xhV5w%3A1779831391267&ei=XxIWavT9D9WB9u8P5IfByAY&biw=1494&bih=799&ved=0ahUKEwi0qdjO9NeUAxXVgP0HHeRDEGkQ4dUDCBA&uact=5&oq=opfikersee&gs_lp=Egxnd3Mtd2l6LXNlcnAiCm9wZmlrZXJzZWUyBRAAGO8FMggQABiABBiiBDIFEAAY7wUyCBAAGIAEGKIEMgUQABjvBUifB1DrBVjrBXABeACQAQCYAVKgAVKqAQExuAEDyAEA-AEBmAICoAJtwgIIEAAY7wUYsAPCAgsQABiABBiiBBiwA5gDAIgGAZAGBZIHATKgB_ACsgcBMbgHXsIHAzMtMsgHFoAIAQ&sclient=gws-wiz-serp#sv=CAwSiwIKBmxjbF9wdhIzCgNwdnESLENnMHZaeTh4TVdveGJXc3hhSGg1SWhBS0NtOXdabWxyWlhKelpXVVFBaGdEEpIBCgNscWkSigFDZ3B2Y0dacGEyVnljMlZsU0ozX3dyaUdzSUNBQ0ZvU0VBQWlDbTl3Wm1sclpYSnpaV1V5QW1SbGtnRU1abWx6YUdsdVoxOXdiMjVrbWdFa1EyaGtSRk5WYUU1TlJ6bHVVekJXU2xFd1JtNVRWVTB4V0hwV1dHTnRiRzVTVWtGQy1nRUVDRFFRSXcSEgoDdGJzEgtscmY6ITNzSUFFPRIPCgFxEgpvcGZpa2Vyc2VlGhJsb2NhbC1wbGFjZS12aWV3ZXIYCiChxuyRAw" target="_blank" class="spot-card-link">
+
+      <div class="spot-card fade-in">
+
+        <div class="spot-icon">
+          <i data-lucide="waves"></i>
+        </div>
+
+        <div class="spot-cat">Park & Natur</div>
+
+        <h3 class="spot-name">Opfikerpark (Glattpark-See)</h3>
+
+          <p class="spot-desc">
+  Riesiger Park mit künstlichem See, Sandstrand und breiten Wegen direkt im Glattpark. Im Sommer sitzen hier viele am Wasser oder hängen einfach auf der Wiese ab.
+</p>
+        
+
+      </div>
+
+    </a>
+
+
+    <!-- opfiker BADI -->
+    <a href="https://www.opfikon.ch/freizeitbad" target="_blank" class="spot-card-link">
+
+      <div class="spot-card fade-in">
+
+        <div class="spot-icon">
+          <i data-lucide="waves"></i>
+        </div>
+
+        <div class="spot-cat">Sport & Wasser</div>
+
+        <h3 class="spot-name">Freizeitbad & Badi</h3>
+
+        <p class="spot-desc">
+          Hallenbad mit Schwimmkursen für alle Altersgruppen.
+          Im Sommer öffnet das Freibad Richtung Glatt.
+        </p>
+
+      </div>
+
+    </a>
+
+
+    <!-- HARDWALDTURM in hardwald -->
+    <a href="https://de.wikipedia.org/wiki/Hardwaldturm" target="_blank" class="spot-card-link">
+
+      <div class="spot-card fade-in">
+
+        <div class="spot-icon">
+          <i data-lucide="trees"></i>
+        </div>
+
+        <div class="spot-cat">Aussicht & Wald</div>
+
+        <h3 class="spot-name">Hardwaldturm</h3>
+
+        <p class="spot-desc">
+            Der Hardwaldturm liegt ruhig mitten im Wald. Nach den 210 Stufen hat man eine schöne Aussicht über das Glatttal. Ich gehe dort gerne spazieren, wenn ich kurz den Kopf frei bekommen will.
+        </p>
+
+      </div>
+
+    </a>
+
+
+    <!-- FITNESS -->
+    <a href="https://www.google.com/maps/place/Street+Workout+Park+Opfikerpark/@47.4222373,8.5672187,645m/data=!3m2!1e3!4b1!4m6!3m5!1s0x479aa1a26796e785:0x43522bd1916f445c!8m2!3d47.4222373!4d8.5672187!16s%2Fg%2F11rsskykj6?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="spot-card-link">
+
+      <div class="spot-card fade-in">
+
+        <div class="spot-icon">
+          <i data-lucide="dumbbell"></i>
+        </div>
+
+        <div class="spot-cat">Sport & Outdoor</div>
+
+        <h3 class="spot-name">Street Workout Park Opfikerpark</h3>
+
+        <p class="spot-desc">
+          Kleiner Fitnesspark mit Geräten direkt draussen. Kostenlos, einfach zugänglich und gut für ein kurzes Training ohne Fitnessabo.
+        </p>
+
+      </div>
+
+    </a>
+
+
+    <!-- GRAFFLAND -->
+    <a href="https://www.graffland.ch/" target="_blank" class="spot-card-link">
+
+      <div class="spot-card fade-in">
+
+        <div class="spot-icon">
+          <i data-lucide="spray-can"></i>
+        </div>
+
+        <div class="spot-cat">Urban & Kreativ</div>
+
+        <h3 class="spot-name">Graffland Zürich</h3>
+
+        <p class="spot-desc">
+        Graffland ist ein legaler Ort für Graffiti und Workshops. Hier kann man kreativ sein und etwas anderes erleben als bei normalen Freizeitorten.
+        </p>
+
+      </div>
+
+    </a>
+
+
+    <!-- GRILLPLATZ -->
+    <a href="https://www.komoot.com/de-de/highlight/3105308" target="_blank" class="spot-card-link">
+
+      <div class="spot-card fade-in">
+
+        <div class="spot-icon">
+          <i data-lucide="flame"></i>
+        </div>
+
+        <div class="spot-cat">Grillen & Natur</div>
+
+        <h3 class="spot-name">Grillplätze am Glattpark</h3>
+
+        <p class="spot-desc">
+          Grosszügige Grillplätze direkt an der Glatt in Glattpark und Spielraum ara Glatt
+          kostenlos und perfekt für Gruppen im Sommer.
+        </p>
+
+      </div>
+
+    </a>
+
+  </div>
+
+</section>
+
+<!-- EVENTS -->
+<section id="events" class="events-section">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Events & Veranstaltungen</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="events-list">
+
+    <a href="https://www.opfikon.ch/foodfestival" target="_blank" class="event-row event-link fade-in">
+      <div>
+        <div class="event-month">SEP</div>
+        <div class="event-day">26</div>
+      </div>
+      <div>
+        <div class="event-name">Food-Festival Opfikon</div>
+        <div class="event-detail">Samstag, 26. September 2026 · Spielraum ara Glatt / Graffland Zürich · Jede Portion CHF 6.–</div>
+      </div>
+      <div class="event-tag">Kulinarik</div>
+    </a>
+
+    <a href="https://www.opfikon.ch/progarch" target="_blank" class="event-row event-link fade-in">
+      <div>
+        <div class="event-month">GANZJ.</div>
+        <div class="event-day">—</div>
+      </div>
+      <div>
+        <div class="event-name">Kleintheater Mettlen</div>
+        <div class="event-detail">Singsaal Schulhaus Lättenwiesen · Tickets in der Stadtbibliothek oder online</div>
+      </div>
+      <div class="event-tag">Theater</div>
+    </a>
+
+    <a href="https://www.opfikon.ch/anlaesseaktuelles/6877477" target="_blank" class="event-row event-link fade-in">
+      <div>
+        <div class="event-month">AUG</div>
+        <div class="event-day">19</div>
+      </div>
+      <div>
+        <div class="event-name">Opfiker Open-Air-Filmfestival</div>
+        <div class="event-detail">19.–22. August 2026 · Freizeitbad Opfikon · Kulturkommission Opfikon</div>
+      </div>
+      <div class="event-tag">Film & Kultur</div>
+    </a>
+
+    <a href="https://fäscht118.ch/" target="_blank" class="event-row event-link fade-in">
+      <div>
+        <div class="event-month">JUN</div>
+        <div class="event-day">05</div>
+      </div>
+      <div>
+        <div class="event-name">Fäscht 118 – Feuerwehr-Chilbi</div>
+        <div class="event-detail">5.–7. Juni 2026 · Autobahndeckel A51 Bubenholztunnel · Klassische Chilbi mit Food-Ständen, Musik und Einblicken in die Arbeit der Feuerwehr.</div>
+      </div>
+      <div class="event-tag">Lokalfest</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- KULTUR -->
+<section id="kultur">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Kultur & Wissen</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="kultur-grid">
+
+    <div class="kultur-card fade-in" data-num="①">
+      <div class="kultur-icon">
+        <i data-lucide="landmark"></i>
+      </div>
+
+      <h3 class="kultur-name">Ortsmuseum Dorf-Träff</h3>
+
+      <p class="kultur-desc">
+        Altes Gebäude, viel Geschichte und mitten im alten Dorfkern von Opfikon. Im Dorf-Träff gibt es ein kleines Ortsmuseum und auch Ausstellungen in der Galerie.
+      </p>
+
+      <a href="https://www.opfikon.ch/dorftraeff" target="_blank" class="kultur-link">
+        Mehr erfahren
+      </a>
+    </div>
+
+
+    <div class="kultur-card fade-in" data-num="②">
+      <div class="kultur-icon">
+        <i data-lucide="book-open"></i>
+      </div>
+
+      <h3 class="kultur-name">Stadtbibliothek Opfikon</h3>
+
+      <p class="kultur-desc">
+        Die Stadtbibliothek an der Wallisellerstrasse 85 ist mehr als nur ein Ort zum Bücher ausleihen. Hier finden regelmässig Lesungen und Veranstaltungen statt, ausserdem gibt es Tickets fürs Kleintheater Mettlen.
+      </p>
+
+      <a href="https://www.opfikon.ch/stadtbibliothek" target="_blank" class="kultur-link">
+        Zur Bibliothek
+      </a>
+    </div>
+
+
+    <div class="kultur-card fade-in" data-num="③">
+      <div class="kultur-icon">
+        <i data-lucide="theater"></i>
+      </div>
+
+      <h3 class="kultur-name">Kleintheater Mettlen</h3>
+
+      <p class="kultur-desc">
+        Eines der versteckten Kulturjuwelen von Glattbrugg.
+        Professionelles Kleintheater im Schulhaus Lättenwiesen
+        mit jährlichem Spielplan.
+      </p>
+
+      <a href="https://www.opfikon.ch/progarch" target="_blank" class="kultur-link">
+        Programm
+      </a>
+    </div>
+
+
+    <div class="kultur-card fade-in" data-num="④">
+      <div class="kultur-icon">
+        <i data-lucide="image"></i>
+      </div>
+
+      <h3 class="kultur-name">Galerie im Stadthaus</h3>
+
+      <p class="kultur-desc">
+       Im Stadthaus Opfikon finden regelmässig wechselnde Ausstellungen von lokalen und regionalen Kunstschaffenden statt. Der Eintritt ist kostenlos und viele kennen den Ort gar nicht.
+      </p>
+
+      <a href="https://www.opfikon.ch/galerieimstadthaus" target="_blank" class="kultur-link">
+        Aktuelle Ausstellung
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- NATUR -->
+<section id="natur" class="natur-section">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Draussen & Natur</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="natur-grid">
+
+    <div class="natur-card fade-in">
+      <div class="natur-badge">Laufen & Velo</div>
+      <h3>Glatt-Runde</h3>
+      <p>Ruhige Wege direkt entlang der Glatt, beliebt zum Joggen, Velofahren oder für entspannte Spaziergänge weit weg vom Verkehr. Einer meiner Lieblingsorte zum Joggen ;-) </p>
+    </div>
+
+    <div class="natur-card fade-in">
+      <div class="natur-badge">Relaxen</div>
+      <h3>Waldweiher Maas</h3>
+      <p>Ein kleiner See direkt in Glattbrugg. Sommer und Winter ein Geheimtipp für einen ruhigen Spaziergang oder eine kurze Fahrradpause mitten in der Natur.</p>
+    </div>
+
+    <div class="natur-card fade-in">
+      <div class="natur-badge">Wandern</div>
+      <h3>Waldhütte Häuligrueb</h3>
+      <p> Waldhütte mitten im Grünen, beliebt für Grillfeste, Geburtstage und Vereinsanlässe. Viele aus der Region kennen den Ort von privaten Feiern oder Gruppenausflügen.</p>
+    </div>
+
+    <div class="natur-card fade-in">
+      <div class="natur-badge">Sport</div>
+      <h3>Sportanlage Au</h3>
+      <p>Sportanlage mit Fussballplätzen, Laufbahn und Trainingsmöglichkeiten für alle Altersgruppen. Viele aus der Region kennen den Ort vom Schulsport, Training oder vom TV Opfikon-Glattbrugg.</p>
+    </div>
+
+    <div class="natur-card fade-in">
+      <div class="natur-badge">Familien</div>
+      <h3>Spielplätze & Pärke</h3>
+      <p>Über das ganze Stadtgebiet verteilt gibt es kleinere Parks, Spielplätze und Grünflächen. Vor allem rund um den Bahnhof Opfikon sitzen im Sommer viele einfach draussen oder holen kurz frische Luft.</p>
+    </div>
+
+    <div class="natur-card fade-in">
+  <div class="natur-badge">Regional</div>
+  <h3>Feldhof Opfikon</h3>
+  <p>Hofladen mit Obst, Gemüse, Konfitüre und Sirup direkt aus Opfikon. Schon speziell, wenn man in Glattbrugg wohnt und seine Äpfel fast um die Ecke vom Hof holen kann.</p>
+</div>
+
+  </div>
+</section>
+
+<!-- AI -->
+<section id="ai" class="ai-section">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title">KI-Aktivitätsberater</h2>
+    <div class="section-line"></div>
+  </div>
+  <p class="ai-intro">Du weisst immer noch nicht, was du in Glattbrugg machen willst? Schreib dem KI-Guide, worauf du Lust hast oder mit wem du unterwegs bist. Er schlägt dir passende Orte vor.</p></p>
+
+  <div class="ai-container">
+    <div class="ai-topbar">
+      <div class="ai-topbar-left">
+        <div class="ai-status-dot"></div>
+        <div>
+          <div class="ai-topbar-name">GLATTBRUGG GUIDE</div>
+          <div class="ai-topbar-sub">Powered by Gemini · Opfikon-Experte</div>
+        </div>
+      </div>
+      <div class="ai-model-badge">GEMINI 2.5 FLASH</div>
+    </div>
+    <div class="ai-chips">
+      <button class="ai-chip" onclick="sendChip(this)">Was kann ich heute draussen machen?</button>
+      <button class="ai-chip" onclick="sendChip(this)">Ich bin mit Kindern unterwegs</button>
+      <button class="ai-chip" onclick="sendChip(this)">Wo kann ich sport treiben?</button>
+      <button class="ai-chip" onclick="sendChip(this)">Ich will etwas mit Freunden machen</button>
+      <button class="ai-chip" onclick="sendChip(this)">Günstige Aktivitäten?</button>
+    </div>
+    <div class="ai-messages" id="aiMessages">
+      <div class="msg ai">
+        <div class="msg-avatar">G</div>
+        <div class="msg-bubble">Hoi! Ich bin dein persönlicher Glattbrugg-Guide. Sag mir, was du suchst – ob Sport, Natur, Kultur oder einfach Abschalten – und ich zeige dir die besten Optionen in Opfikon-Glattbrugg.</div>
+      </div>
+    </div>
+    <div class="ai-input-row">
+      <input type="text" id="aiInput" placeholder="Was planst du heute?" autocomplete="off" />
+      <button id="aiSend" onclick="sendMessage()">Senden</button>
+    </div>
+  </div>
+</section>
+
+<!-- GUIDE -->
+<section class="guide-section">
+  <div class="guide-img-wrap">
+  <img src="ayaan.png" alt="Ayaan Khan" class="guide-img">
+  <div class="guide-accent"></div>
+</div>
+  <div class="guide-info fade-in">
+    <div class="guide-role">Entwickler der Webseite</div>
+    <div class="guide-name">AYAAN<br>KHAN</div>
+    <p class="guide-quote">"Ich weiss, wo die echten Spots sind und welche Touristen-Infos du wissen sollst."</p>
+    <div class="guide-tags">
+      <span class="guide-tag">Glattbrugg Bewohner</span>
+      <span class="guide-tag">Zukünftiger Informatiklehrling bei Google</span>
+      <span class="guide-tag">Sekundarschüler</span>
+      
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">INSIDE<span>G</span></a>
+  <span>© 2026 Inside Glattbrugg · Opfikon, Zürich</span>
+  <span>Daten: Stadt Opfikon, opfikon.ch</span>
+</footer>
+
+<script src="app.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+  lucide.createIcons();
+</script>
+</body>
+</html>
