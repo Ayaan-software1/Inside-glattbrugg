@@ -30,7 +30,8 @@ const GEMINI_MODELS = [
   'gemini-2.0-flash'
 ];
 
-// ── animation beim scrollen ──
+
+// ── Animation beim Scrollen ──
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
@@ -48,13 +49,23 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 const messagesEl = document.querySelector('#aiMessages');
 const inputEl = document.querySelector('#aiInput');
 
-// Koordinaten von Opfikon/Glattbrugg für die Wetterabfrage
+
+// Sicherheitscheck, falls HTML-Elemente fehlen
+if (!messagesEl || !inputEl) {
+  console.warn('AI Chat Elemente wurden nicht gefunden. Prüfe #aiMessages und #aiInput im HTML.');
+}
+
+
+// Koordinaten von Opfikon / Glattbrugg für die Wetterabfrage
 const LOCAL_LAT = 47.4317;
 const LOCAL_LON = 8.5667;
 
-// ich speichere nur die letzten paar Nachrichten, sonst wird der Chat zu lang
+
+// Ich speichere nur die letzten paar Nachrichten, sonst wird der Chat zu lang
 let chatHistory = [];
 
+
+// Chip Button senden
 function sendChip(button) {
   const chipText = button.textContent.trim();
 
@@ -62,19 +73,20 @@ function sendChip(button) {
   sendMessage();
 }
 
-inputEl.addEventListener('keydown', function (event) {
+
+// Enter Taste zum Senden
+inputEl?.addEventListener('keydown', function (event) {
   if (event.key === 'Enter') {
     sendMessage();
   }
 });
 
-function appendMsg(role, text) {
 
-  // neue nachricht erstellen
+// Nachricht im Chat anzeigen
+function appendMsg(role, text) {
   const msgWrapper = document.createElement('div');
   msgWrapper.className = `msg ${role}`;
 
-  // kleines avatar links/rechts
   const avatarBox = document.createElement('div');
   avatarBox.className = 'msg-avatar';
 
@@ -84,25 +96,21 @@ function appendMsg(role, text) {
     avatarBox.textContent = 'Du';
   }
 
-  // eigentliche nachricht bubble
   const msgBubble = document.createElement('div');
   msgBubble.className = 'msg-bubble';
   msgBubble.textContent = text;
 
-  // früher hatte ich hier appendChild problem :-(
   msgWrapper.appendChild(avatarBox);
   msgWrapper.appendChild(msgBubble);
 
-  //in den chat hinzufügen
   messagesEl.appendChild(msgWrapper);
-
-  // automatisch nach unten scrollen
   messagesEl.scrollTop = messagesEl.scrollHeight;
 
   return msgWrapper;
 }
 
 
+// Tippanimation anzeigen
 function appendTyping() {
   const div = document.createElement('div');
   div.className = 'msg ai';
@@ -121,7 +129,8 @@ function appendTyping() {
   messagesEl.scrollTop = messagesEl.scrollHeight;
 }
 
-//hier notiere ich alle mögliche wetter unde deren code(code ist zu jede wetter zugeordnet)
+
+// Wettercode zu Text umwandeln
 function weatherCodeToText(code) {
   const map = {
     0: 'klarer Himmel',
@@ -157,7 +166,8 @@ function weatherCodeToText(code) {
   return map[code] || 'wechselhaftes Wetter';
 }
 
-//hier ist der logik hier unser wetter funktion
+
+// Wetterdaten holen
 async function getLocalWeatherContext() {
   try {
     const url =
@@ -188,7 +198,10 @@ async function getLocalWeatherContext() {
 
     if (data.hourly && data.hourly.precipitation_probability && data.hourly.time) {
       const currentTime = new Date();
-      const currentHourString = currentTime.toISOString().slice(0, 13);
+
+      const currentHourString = currentTime
+        .toLocaleString('sv-SE', { timeZone: 'Europe/Zurich' })
+        .slice(0, 13);
 
       let startIndex = data.hourly.time.findIndex(t => t.startsWith(currentHourString));
 
@@ -221,16 +234,76 @@ Wenn es sonnig oder trocken ist, empfehle Outdoor-Orte.
 
   } catch (err) {
     console.error('Weather error:', err);
-    return 'Wetterdaten konnten nicht geladen werden. Gib trotzdem eine passende lokale Empfehlung.';
+
+    return `
+Wetterdaten konnten nicht geladen werden.
+Gib trotzdem eine passende lokale Empfehlung.
+Wenn die Frage nach Wetter klingt, erwähne kurz, dass du aktuell keine Wetterdaten laden konntest.
+    `.trim();
   }
 }
-// hier ist quasi die verbindung des wetter funtion mit ai chat
-async function callGeminiWithFallback(systemContext, contents) {
 
+
+// Zufällige Ersatzantwort, falls Gemini nicht antwortet
+function getRandomFallback(userText = '') {
+  const text = userText.toLowerCase();
+
+  if (text.includes('kind') || text.includes('familie')) {
+    const familyReplies = [
+      'Für Familie oder Kinder passt das Freizeitbad Opfikon gut. Bei trockenem Wetter ist auch der Glattpark-See schön.',
+      'Mit Kindern würde ich den Opfikerpark oder das Freizeitbad Opfikon empfehlen. Beides ist einfach erreichbar und nicht kompliziert.',
+      'Für eine Familienaktivität passt der Glattpark-See gut. Wenn ihr lieber drinnen seid, ist das Freizeitbad Opfikon eine gute Wahl.'
+    ];
+
+    return familyReplies[Math.floor(Math.random() * familyReplies.length)];
+  }
+
+  if (text.includes('essen') || text.includes('restaurant') || text.includes('café') || text.includes('cafe')) {
+    const foodReplies = [
+      'Für Essen oder einen Kaffee würde ich Restaurants und Cafés in Glattbrugg oder im Glattpark anschauen. Das ist unkompliziert und nah.',
+      'Wenn du etwas essen möchtest, passt Glattbrugg oder der Glattpark gut. Dort findest du mehrere einfache Restaurant- und Café-Optionen.',
+      'Für eine kurze Essenspause sind die Cafés und Restaurants rund um Glattbrugg oder Glattpark eine gute Wahl.'
+    ];
+
+    return foodReplies[Math.floor(Math.random() * foodReplies.length)];
+  }
+
+  if (text.includes('spazier') || text.includes('laufen') || text.includes('draussen') || text.includes('outdoor')) {
+    const outdoorReplies = [
+      'Für frische Luft empfehle ich den Opfikerpark oder den Glattpark-See. Das passt gut für einen kurzen Spaziergang.',
+      'Ein Spaziergang beim Opfikerpark oder rund um den Glattpark-See ist eine einfache und schöne Option.',
+      'Wenn du raus möchtest, ist der Glattpark-See eine gute Wahl. Für etwas mehr Ruhe passt auch der Opfikerpark.'
+    ];
+
+    return outdoorReplies[Math.floor(Math.random() * outdoorReplies.length)];
+  }
+
+  if (text.includes('regen') || text.includes('kalt') || text.includes('indoor') || text.includes('drinnen')) {
+    const indoorReplies = [
+      'Bei Regen oder Kälte würde ich die Stadtbibliothek Opfikon, das Glattzentrum oder das Freizeitbad Opfikon empfehlen.',
+      'Für drinnen passt das Glattzentrum gut. Wenn du etwas Ruhigeres willst, wäre die Stadtbibliothek Opfikon besser.',
+      'Wenn das Wetter schlecht ist, sind Freizeitbad Opfikon, Stadtbibliothek oder Glattzentrum gute Indoor-Optionen.'
+    ];
+
+    return indoorReplies[Math.floor(Math.random() * indoorReplies.length)];
+  }
+
+  const fallbackReplies = [
+    'Heute passt ein kurzer Spaziergang im Opfikerpark gut, wenn das Wetter angenehm ist. Bei Regen wäre die Stadtbibliothek Opfikon eine gute Alternative.',
+    'Für eine kurze Pause empfehle ich den Glattpark-See. Wenn du lieber drinnen bleiben willst, passt das Glattzentrum gut.',
+    'Wenn du etwas Ruhiges suchst, wäre die Stadtbibliothek Opfikon passend. Für frische Luft ist der Opfikerpark eine einfache Wahl.',
+    'Für eine kurze Aktivität empfehle ich einen Spaziergang Richtung Opfikerpark oder, bei schlechtem Wetter, einen ruhigen Indoor-Ort.',
+    'Wenn du nicht viel Zeit hast, ist der Opfikerpark eine einfache Wahl. Für drinnen passt das Glattzentrum oder die Stadtbibliothek.'
+  ];
+
+  return fallbackReplies[Math.floor(Math.random() * fallbackReplies.length)];
+}
+
+
+// Verbindung mit Gemini API
+async function callGeminiWithFallback(systemContext, contents, userText) {
   for (const model of GEMINI_MODELS) {
-
     try {
-
       const res = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`,
         {
@@ -242,7 +315,12 @@ async function callGeminiWithFallback(systemContext, contents) {
             system_instruction: {
               parts: [{ text: systemContext }]
             },
-            contents: contents
+            contents: contents,
+            generationConfig: {
+              temperature: 0.8,
+              topP: 0.9,
+              maxOutputTokens: 180
+            }
           })
         }
       );
@@ -250,26 +328,28 @@ async function callGeminiWithFallback(systemContext, contents) {
       const data = await res.json();
 
       if (data.error) {
-        console.warn('Gemini error:', data.error.message);
+        console.warn(`Gemini error with ${model}:`, data.error.message);
         continue;
       }
 
-      const reply =
-        data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
-      if (reply) {
-        return reply;
+      if (reply && reply.trim()) {
+        return reply.trim();
       }
 
     } catch (err) {
-      console.warn(err);
+      console.warn(`Fetch error with ${model}:`, err);
     }
   }
 
-  return 'Heute eignet sich der Opfikerpark perfekt für einen Spaziergang. Bei schlechtem Wetter empfehle ich das Freizeitbad Opfikon oder das Glattzentrum.';
+  return getRandomFallback(userText);
 }
-//mit hilfe von ki habe ich einen guten Prompt bekommen den ich den ai chat gegeben habe den es immmer folgen muss
+
+
+// Hauptfunktion für Chat
 async function sendMessage() {
+  if (!messagesEl || !inputEl) return;
 
   const text = inputEl.value.trim();
 
@@ -278,7 +358,6 @@ async function sendMessage() {
   inputEl.value = '';
 
   appendMsg('user', text);
-
   appendTyping();
 
   const weatherContext = await getLocalWeatherContext();
@@ -292,6 +371,9 @@ Sprache:
 - Maximal 100 Wörter.
 - Keine langen Erklärungen.
 - Gib konkrete Empfehlungen.
+- Antworte passend auf die konkrete Frage des Nutzers.
+- Gib nicht immer dieselbe Standardantwort.
+- Wenn du unsicher bist, gib 1 bis 2 passende Optionen.
 
 Wichtig:
 Du bekommst aktuelle Wetterdaten. Nutze sie aktiv.
@@ -321,10 +403,8 @@ ${weatherContext}
   `.trim();
 
   try {
-
     const contents = [];
 
-    // Chat memory
     chatHistory.slice(-6).forEach(msg => {
       contents.push({
         role: msg.role,
@@ -332,71 +412,17 @@ ${weatherContext}
       });
     });
 
-    // jetzige nachricht
     contents.push({
       role: 'user',
       parts: [{ text }]
     });
 
-    // Models fallback
-    const models = [
-      'gemini-2.5-flash',
-      'gemini-2.0-flash'
-    ];
-
-    let reply = null;
-
-    for (const model of models) {
-
-      try {
-
-        const res = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              system_instruction: {
-                parts: [{ text: systemContext }]
-              },
-              contents: contents
-            })
-          }
-        );
-
-        const data = await res.json();
-
-        if (data.error) {
-          console.warn('Gemini error:', data.error.message);
-          continue;
-        }
-
-        reply =
-          data?.candidates?.[0]?.content?.parts?.[0]?.text;
-
-        if (reply) {
-          break;
-        }
-
-      } catch (err) {
-        console.warn(err);
-      }
-    }
+    const reply = await callGeminiWithFallback(systemContext, contents, text);
 
     document.getElementById('typing')?.remove();
 
-    // Final fallback
-    if (!reply) {
-
-      reply =
-        'Heute eignet sich der Opfikerpark perfekt für einen Spaziergang. Bei schlechtem Wetter empfehle ich das Freizeitbad Opfikon oder das Glattzentrum.';
-    }
-
     appendMsg('ai', reply);
 
-    // Save memory
     chatHistory.push({
       role: 'user',
       text: text
@@ -408,12 +434,11 @@ ${weatherContext}
     });
 
   } catch (err) {
-
     document.getElementById('typing')?.remove();
 
     appendMsg(
       'ai',
-      'Momentan ist der KI-Guide kurz beschäftigt. Versuch es gleich nochmals 😊'
+      getRandomFallback(text)
     );
 
     console.error(err);
@@ -421,8 +446,5 @@ ${weatherContext}
 }
 
 
-
-
-//Vielen dank das du den code bis hier gelesen hast!!!! 
-// Ich hoffe es gefällt dir
-
+// Vielen Dank, dass du den Code bis hier gelesen hast.
+// Ich hoffe, es gefällt dir.
