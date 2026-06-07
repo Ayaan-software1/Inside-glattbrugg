@@ -22,13 +22,10 @@
 
 // ── GEMINI API KEY ──
 
-const GEMINI_API_KEY = 'AIzaSyBj_pyzEUS-BlA2YdR44rFoqTYv2-iRBZE';
+const GEMINI_PROXY_URL = 'https://glattguide-gemini.ayaan-zurich.workers.dev';
 
 
-const GEMINI_MODELS = [
-  'gemini-2.5-flash',
-  'gemini-2.0-flash'
-];
+
 
 
 // ── Animation beim Scrollen ──
@@ -422,52 +419,32 @@ function getRandomFallback(userText = '') {
 
 // Verbindung mit Gemini API
 async function callGeminiWithFallback(systemContext, contents, userText) {
-  for (const model of GEMINI_MODELS) {
-    try {
-      const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            system_instruction: {
-              parts: [{ text: systemContext }]
-            },
-            contents: contents,
-            generationConfig: {
-              temperature: 0.9,
-              topP: 0.95,
-              maxOutputTokens: 200
-            }
-          })
-        }
-      );
+  try {
+    const res = await fetch(GEMINI_PROXY_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        systemContext,
+        contents
+      })
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      // Wichtig zum Testen:
-      // Wenn Gemini nicht antwortet, siehst du hier den Grund in der Browser-Konsole.
-      console.log('Gemini response:', data);
+    console.log('Gemini proxy response:', data);
 
-      if (data.error) {
-        console.warn(`Gemini error with ${model}:`, data.error.message);
-        continue;
-      }
+    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
-      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-
-      if (reply && reply.trim()) {
-        return reply.trim();
-      }
-
-    } catch (err) {
-      console.warn(`Fetch error with ${model}:`, err);
+    if (reply && reply.trim()) {
+      return reply.trim();
     }
+
+  } catch (err) {
+    console.warn('Cloudflare Worker Error:', err);
   }
 
-  // Wenn Gemini nicht funktioniert, kommt wenigstens eine passende lokale Antwort.
   return getRandomFallback(userText);
 }
 
