@@ -481,7 +481,8 @@ Deine Aufgabe:
 Sprache:
 - Antworte immer auf Deutsch.
 - Freundlich, direkt und lokal.
-- Maximal 100 Wörter.
+- Antworte in 2 bis 4 vollständigen Sätzen.
+- Gib immer mindestens eine konkrete Empfehlung mit kurzer Begründung.
 - Keine langen Erklärungen.
 - Keine Bulletpoints, ausser es passt wirklich.
 - Keine erfundenen Orte.
