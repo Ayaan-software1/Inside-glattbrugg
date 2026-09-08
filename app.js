@@ -45,7 +45,7 @@ document.querySelectorAll('.fade-in').forEach(element => {
 });
 
 
-// ── AI CHAT ──
+// ──ki chat code hier ──
 
 const messagesEl = document.querySelector('#aiMessages');
 const inputEl = document.querySelector('#aiInput');
